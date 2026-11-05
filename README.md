@@ -13,7 +13,7 @@ dy/dt = δmxy/(a + x) - γy
 ## Запуск
 
 ```bash
-python3 main.py --duration 50 --step 0.05 --output simulation.csv
+python3 main.py --duration 50 --step 0.05
 ```
 
 Если начальные значения не указаны, программа случайно выбирает `x(0)` от
@@ -35,6 +35,9 @@ python3 main.py --prey 4 --predator 1.5
 `m=1`, `a=1`). Результаты записываются в CSV с колонками `time`, `prey`,
 `predator`.
 
+Результаты автоматически сохраняются в отдельную игнорируемую Git-папку
+`results/`: `results/simulation.csv` и `results/simulation.png`.
+
 ## Построение графиков
 
 Установить зависимости:
@@ -46,7 +49,7 @@ python3 -m pip install -r requirements.txt
 Построить единый красивый рисунок:
 
 ```bash
-python3 plot_results.py --input simulation.csv --output simulation.png
+python3 plot_results.py
 ```
 
 В PNG входят графики численности во времени, фазовый портрет, функция

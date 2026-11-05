@@ -130,8 +130,8 @@ def make_figure(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, default=Path("simulation.csv"))
-    parser.add_argument("--output", type=Path, default=Path("simulation.png"))
+    parser.add_argument("--input", type=Path, default=Path("results/simulation.csv"))
+    parser.add_argument("--output", type=Path, default=Path("results/simulation.png"))
     args = parser.parse_args()
     make_figure(args.input, args.output)
     print(f"Графики сохранены в {args.output}")

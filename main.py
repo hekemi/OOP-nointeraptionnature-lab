@@ -37,13 +37,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("simulation.csv"),
+        default=Path("results/simulation.csv"),
         help="CSV file for simulation results.",
     )
     parser.add_argument(
         "--plot-output",
         type=Path,
-        default=Path("simulation.png"),
+        default=Path("results/simulation.png"),
         help="PNG file for the generated plots.",
     )
     return parser
@@ -57,6 +57,7 @@ def main(argv: list[str] | None = None) -> int:
         args.predator if args.predator is not None else generator.uniform(0.8, 3.5)
     )
     try:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
         states = simulate(
             Parameters(),
             prey,
