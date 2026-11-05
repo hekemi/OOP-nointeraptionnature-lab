@@ -5,6 +5,7 @@ import csv
 import sys
 from pathlib import Path
 
+from plot_results import make_figure
 from rosenzweig_macarthur import Parameters, simulate
 
 
@@ -24,6 +25,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("simulation.csv"),
         help="CSV file for simulation results.",
     )
+    parser.add_argument(
+        "--plot-output",
+        type=Path,
+        default=Path("simulation.png"),
+        help="PNG file for the generated plots.",
+    )
     return parser
 
 
@@ -41,10 +48,12 @@ def main(argv: list[str] | None = None) -> int:
             writer = csv.writer(file)
             writer.writerow(("time", "prey", "predator"))
             writer.writerows((state.time, state.prey, state.predator) for state in states)
+        make_figure(args.output, args.plot_output)
     except (OSError, ValueError) as error:
         print(f"Ошибка: {error}", file=sys.stderr)
         return 1
     print(f"Результаты сохранены в {args.output}")
+    print(f"Графики сохранены в {args.plot_output}")
     return 0
 
 
